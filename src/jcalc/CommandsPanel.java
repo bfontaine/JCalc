@@ -1,8 +1,6 @@
 package jcalc;
 
-import java.util.Observer;
-import java.util.Observable;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 class CalcButton extends JButton {
@@ -36,34 +34,33 @@ class OperationButton extends CalcButton {
     }
 }
 
-class JCalcView extends JPanel implements Observer {
-
-    private JTextField result;
-
-    private NumberButton[] numbers;
+public class CommandsPanel extends JPanel {
+    private NumberButton[] buttons;
     private OperationButton[] operations;
 
-    public JCalcView() {
+    private static final int MAX_NUMBER = 9;
+
+    public CommandsPanel(ActionListener listener) {
+
         super();
-        setup();
-    }
 
-    private void setup() {
-        result = new JTextField(20);
+        buttons = new NumberButton[MAX_NUMBER+1];
 
-        result.setText("0");
-        result.setEnabled(false);
-        result.setHorizontalAlignment(JTextField.RIGHT);
+        for (int i=0; i<buttons.length; i++) {
+            buttons[i] = new NumberButton(i);
+            buttons[i].addActionListener(listener);
+            add(buttons[i]);
+        }
 
-        setupNumbers();
-        setupOperations();
+        // tmp
+        operations = new OperationButton[] {
+            new OperationButton('+'),
+            new OperationButton('=')
+        };
 
-        add(result);
-    }
-
-    private void setupNumbers() {}
-    private void setupOperations() {}
-
-    public void update(Observable source, Object data) {
+        for (int i=0; i<operations.length; i++) {
+            operations[i].addActionListener(listener);
+            add(operations[i]);
+        }
     }
 }
