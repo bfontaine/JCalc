@@ -1,22 +1,25 @@
 package jcalc;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 public class JCalc implements Runnable {
     private static final String name = "JCalc";
 
     public void run() {
         JFrame jf = new JFrame(name);
-        JTextField result = new JTextField(20);
 
-        result.setText("0");
-        result.setEnabled(false);
-        result.setHorizontalAlignment(JTextField.RIGHT);
+        final JCalcView view = new JCalcView();
+        final JCalcModel model = new JCalcModel();
+        final JCalcController controller = new JCalcController(model);
 
-        jf.add(result);
-        jf.pack();
+        model.addObserver(view);
+        jf.add(view);
 
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        jf.pack();
+        view.setVisible(true);
         jf.setVisible(true);
     }
 
