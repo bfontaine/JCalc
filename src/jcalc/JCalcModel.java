@@ -2,6 +2,7 @@ package jcalc;
 
 import java.util.*;
 
+// this is a suffix calc model for now
 class JCalcModel extends Observable {
 
     // we'll use integers for now
@@ -9,6 +10,11 @@ class JCalcModel extends Observable {
 
     public JCalcModel() {
         numbers = new ArrayDeque<Integer>();
+    }
+
+    private void notifyChange() {
+        setChanged();
+        notifyObservers(getValue());
     }
 
     public int getValue() {
@@ -19,19 +25,32 @@ class JCalcModel extends Observable {
 
     public void pushValue(int n) {
         numbers.push(new Integer(n));
-        setChanged();
-        notifyObservers();
+        notifyChange();
+    }
+
+    public int popValue() {
+        if (numbers.isEmpty()) {
+            return 0;
+        }
+        return numbers.pop();
     }
 
     public void reset() {
         numbers.clear();
-        setChanged();
-        notifyObservers();
+        notifyChange();
     }
 
+    // tmp method, we'll use a more generic way to do operations after
     public void executeOperation(char op) {
-        // TODO
-        setChanged();
-        notifyObservers();
+        switch(op) {
+        case '+':
+            pushValue(popValue()+popValue());
+            break;
+        case '-':
+            int p = popValue();
+            pushValue(popValue()-p);
+        }
+
+        notifyChange();
     }
 }

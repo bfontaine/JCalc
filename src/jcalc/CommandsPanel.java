@@ -1,7 +1,8 @@
 package jcalc;
 
-import java.awt.event.ActionListener;
+import java.awt.*;
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
 class CalcButton extends JButton {
     public static final String actionCommand = null;
@@ -20,6 +21,11 @@ class NumberButton extends CalcButton {
         setActionCommand(NumberButton.actionCommand);
     }
 
+    public NumberButton(int value, ActionListener l) {
+        this(value);
+        addActionListener(l);
+    }
+
     public int getValue() { return value; }
 }
 
@@ -32,35 +38,77 @@ class OperationButton extends CalcButton {
         this.op = op;
         setActionCommand(OperationButton.actionCommand);
     }
+
+    public OperationButton(char op, ActionListener l) {
+        this(op);
+        addActionListener(l);
+    }
+
+    public char getOp() { return op; }
+}
+
+class NumbersPanel extends JPanel {
+
+    private NumberButton[] buttons;
+
+    public NumbersPanel(ActionListener listener) {
+        super();
+
+        JPanel main = new JPanel(),
+               more = new JPanel();
+
+        // we might want to use a GridBagLayout instead in the future
+        main.setLayout(new GridLayout(0, 3));
+
+        setLayout(new BorderLayout());
+        add(main, BorderLayout.CENTER);
+        add(more, BorderLayout.SOUTH);
+
+        buttons = new NumberButton[10];
+
+        for (int i=0; i<buttons.length; i++) {
+            buttons[i] = new NumberButton(i, listener);
+
+            if (i > 0) {
+                main.add(buttons[i]);
+            } else {
+                more.add(buttons[i]);
+            }
+        }
+    }
+}
+
+class OperationsPanel extends JPanel {
+    public OperationsPanel(ActionListener listener) {
+        super();
+
+        JPanel main = new JPanel(),
+               more = new JPanel();
+
+        // we might want to use a GridBagLayout instead in the future
+        main.setLayout(new GridLayout(0, 2));
+
+        setLayout(new BorderLayout());
+        add(main, BorderLayout.CENTER);
+        add(more, BorderLayout.SOUTH);
+
+        OperationButton plus  = new OperationButton('+', listener);
+        OperationButton minus = new OperationButton('-', listener);
+
+        OperationButton equals = new OperationButton('=', listener);
+
+        main.add(plus);
+        main.add(minus);
+
+        more.add(equals);
+    }
 }
 
 public class CommandsPanel extends JPanel {
-    private NumberButton[] buttons;
-    private OperationButton[] operations;
-
-    private static final int MAX_NUMBER = 9;
-
     public CommandsPanel(ActionListener listener) {
-
         super();
 
-        buttons = new NumberButton[MAX_NUMBER+1];
-
-        for (int i=0; i<buttons.length; i++) {
-            buttons[i] = new NumberButton(i);
-            buttons[i].addActionListener(listener);
-            add(buttons[i]);
-        }
-
-        // tmp
-        operations = new OperationButton[] {
-            new OperationButton('+'),
-            new OperationButton('=')
-        };
-
-        for (int i=0; i<operations.length; i++) {
-            operations[i].addActionListener(listener);
-            add(operations[i]);
-        }
+        add(new NumbersPanel(listener));
+        add(new OperationsPanel(listener));
     }
 }

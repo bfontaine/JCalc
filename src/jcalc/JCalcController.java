@@ -11,6 +11,14 @@ class JCalcController implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        // TODO
+        if (e.getActionCommand() == "number") {
+            this.m.pushValue(((NumberButton)e.getSource()).getValue());
+            return;
+        }
+
+        if (e.getActionCommand() == "operation") {
+            this.m.executeOperation(((OperationButton)e.getSource()).getOp());
+            return;
+        }
     }
 }
