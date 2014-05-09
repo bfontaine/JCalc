@@ -121,7 +121,7 @@ class OperationsPanel extends JPanel {
         control.add(push);
         control.add(reset);
 
-        for (Character c : new Character[] { '+', '-', '*', '/' }) {
+        for (Character c : new Character[] { '+', '-', '*', '/', '^', '%' }) {
             main.add(new OperationButton(c, listener));
         }
     }
