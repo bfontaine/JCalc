@@ -5,16 +5,21 @@ import java.util.Observable;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+/**
+ * A view for a calculator's current result
+ **/
 class ResultView extends JPanel implements Observer {
 
     private JTextField result;
 
+    /**
+     * Create a new view with an empty field
+     **/
     public ResultView() {
         super();
 
         result = new JTextField(20);
 
-        result.setText("0");
         result.setEnabled(false);
         result.setHorizontalAlignment(JTextField.RIGHT);
         add(result);

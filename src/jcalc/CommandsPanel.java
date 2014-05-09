@@ -4,54 +4,105 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 
+/**
+ * A button with a static action command string
+ **/
 class CalcButton extends JButton {
+
+    /** the class' action command string */
     public static final String actionCommand = null;
 
+    /**
+     * @param s text of the button
+     **/
     public CalcButton(String s) { super(s); }
 }
 
+/**
+ * A button for numbers
+ **/
 class NumberButton extends CalcButton {
 
     public static final String actionCommand = "number";
+
+    /** the button's value */
     private final int value;
 
+    /**
+     * @param value the button's value
+     **/
     public NumberButton(int value) {
         super(""+value);
         this.value = value;
         setActionCommand(NumberButton.actionCommand);
     }
 
+    /**
+     * Create a button and add it a listener
+     * @param value the button's value
+     * @param l a listener for this button
+     **/
     public NumberButton(int value, ActionListener l) {
         this(value);
         addActionListener(l);
     }
 
+    /**
+     * @return the button's value
+     **/
     public int getValue() { return value; }
 }
 
+/**
+ * A button for operations. A button's operation is represented as a char for
+ * the moment.
+ **/
 class OperationButton extends CalcButton {
     public static final String actionCommand = "operation";
+
+    /** the button's operation */
     private final char op;
 
+    /**
+     * @param op the button's operation
+     **/
     public OperationButton(char op) {
         super(""+op);
         this.op = op;
         setActionCommand(OperationButton.actionCommand);
     }
 
+    /**
+     * Create a button and add it a listener
+     * @param op the button's operation
+     * @param l a listener for this button
+     **/
     public OperationButton(char op, ActionListener l) {
         this(op);
         addActionListener(l);
     }
 
+    /**
+     * @return the button's operation
+     **/
     public char getOp() { return op; }
 }
 
-class NumbersPanel extends JPanel {
+/**
+ * A panel for digit buttons
+ **/
+class DigitsPanel extends JPanel {
 
+    /**
+     * the panel's buttons
+     **/
     private NumberButton[] buttons;
 
-    public NumbersPanel(ActionListener listener) {
+    /**
+     * Create a panel with a common listener for all buttons
+     * @param listener the listener to add on each button
+     **/
+    public DigitsPanel(ActionListener listener) {
         super();
 
         JPanel main = new JPanel(),
@@ -78,7 +129,15 @@ class NumbersPanel extends JPanel {
     }
 }
 
+/**
+ * A panel for operation buttons
+ **/
 class OperationsPanel extends JPanel {
+
+    /**
+     * Create a panel with a common listener for all buttons
+     * @param listener the listener to add on each button
+     **/
     public OperationsPanel(ActionListener listener) {
         super();
 
@@ -104,11 +163,19 @@ class OperationsPanel extends JPanel {
     }
 }
 
+/**
+ * A panel for a calculator's buttons.
+ **/
 public class CommandsPanel extends JPanel {
+
+    /**
+     * Create a panel with a common listener for all buttons
+     * @param listener the listener to add on each button
+     **/
     public CommandsPanel(ActionListener listener) {
         super();
 
-        add(new NumbersPanel(listener));
+        add(new DigitsPanel(listener));
         add(new OperationsPanel(listener));
     }
 }
