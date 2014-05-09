@@ -2,10 +2,10 @@ package jcalc;
 
 import java.util.Hashtable;
 
-abstract class JCalcOp {
-    abstract void execute(JCalcModel m);
-}
-abstract class JCalcBinaryOp extends JCalcOp {
+/**
+ * A binary operation
+ **/
+abstract class JCalcBinaryOp {
     public void execute(JCalcModel m) {
         double a = m.popValue(),
                b = m.getValue();
@@ -20,12 +20,12 @@ abstract class JCalcBinaryOp extends JCalcOp {
  * A container for all calculator functions
  **/
 public class JCalcOperations {
-    private static Hashtable<Character, JCalcOp> ops = null;
+    private static Hashtable<Character, JCalcBinaryOp> ops = null;
 
     /**
      * return the default operations table
      **/
-    public static Hashtable<Character, JCalcOp> defaultOps() {
+    public static Hashtable<Character, JCalcBinaryOp> defaultOps() {
         if (ops == null) {
             init();
         }
@@ -36,7 +36,7 @@ public class JCalcOperations {
      * initialize the available operations table
      **/
     private static void init() {
-        ops = new Hashtable<Character, JCalcOp>();
+        ops = new Hashtable<Character, JCalcBinaryOp>();
 
         ops.put('+', new JCalcBinaryOp() {
             double compute(double a, double b) {
