@@ -5,11 +5,13 @@ the Swing API, not as a real project.
 
 ## Build
 
-    ant
+    mvn install
 
 ## Run
 
-    ant run
+    java -jar target/JCalc-1.0.jar
+
+Or double-click on the jar to open the app.
 
 ## Usage
 
