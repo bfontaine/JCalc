@@ -7,13 +7,13 @@ abstract class JCalcOp {
 }
 abstract class JCalcBinaryOp extends JCalcOp {
     public void execute(JCalcModel m) {
-        int b = m.popValue(),
-            a = m.popValue();
+        double b = m.popValue(),
+               a = m.popValue();
 
         m.pushValue(compute(a, b));
     }
 
-    abstract int compute(int a, int b);
+    abstract double compute(double a, double b);
 }
 
 /**
@@ -39,19 +39,19 @@ public class JCalcOperations {
         ops = new Hashtable<Character, JCalcOp>();
 
         ops.put('+', new JCalcBinaryOp() {
-            int compute(int a, int b) {
+            double compute(double a, double b) {
                 return a+b;
             }
         });
 
         ops.put('-', new JCalcBinaryOp() {
-            int compute(int a, int b) {
+            double compute(double a, double b) {
                 return a-b;
             }
         });
 
         ops.put('*', new JCalcBinaryOp() {
-            int compute(int a, int b) {
+            double compute(double a, double b) {
                 return a*b;
             }
         });

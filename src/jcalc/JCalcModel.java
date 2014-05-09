@@ -4,14 +4,14 @@ import java.util.*;
 import java.util.logging.Logger;
 
 /**
- * A model for a calculator. This is a digits suffix calculator for now.
+ * A model for a calculator. This is suffix calculator for now.
  **/
 public class JCalcModel extends Observable {
 
     /**
-     * Internal numbers stack. These are integers for now.
+     * Internal numbers stack.
      **/
-    private Deque<Integer> numbers;
+    private Deque<Double> numbers;
 
     /**
      * Available operations
@@ -24,7 +24,7 @@ public class JCalcModel extends Observable {
      * Create a new model with an empty numbers stack
      **/
     public JCalcModel() {
-        numbers = new ArrayDeque<Integer>();
+        numbers = new ArrayDeque<Double>();
     }
 
     /**
@@ -41,8 +41,8 @@ public class JCalcModel extends Observable {
      * Return the current top value
      * @return current top value
      **/
-    public int getValue() {
-        Integer v = numbers.peek();
+    public double getValue() {
+        Double v = numbers.peek();
 
         return v != null ? v : 0;
     }
@@ -52,8 +52,8 @@ public class JCalcModel extends Observable {
      * @param n the new value
      * @see popValue
      **/
-    public void pushValue(int n) {
-        numbers.push(new Integer(n));
+    public void pushValue(double n) {
+        numbers.push(new Double(n));
         notifyChange();
     }
 
@@ -62,7 +62,7 @@ public class JCalcModel extends Observable {
      * @return the top value
      * @see pushValue
      **/
-    public int popValue() {
+    public double popValue() {
         if (numbers.isEmpty()) {
             return 0;
         }
