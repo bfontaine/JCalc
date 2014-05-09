@@ -5,87 +5,45 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 
 /**
- * A button with a static action command string
+ * A button with an internal value
  **/
-class CalcButton extends JButton {
+class CalcButton<E> extends JButton {
 
-    /** the class' action command string */
-    public static final String actionCommand = null;
+    private E value;
+
+    public CalcButton() { super(); }
 
     /**
-     * @param s text of the button
+     * Create a button and add it a listener
+     * @param value the button's value
+     * @param l a listener for this button
      **/
-    public CalcButton(String s) { super(s); }
+    public CalcButton(E value, ActionListener l, String action) {
+        super(value.toString());
+        this.value = value;
+        setActionCommand(action);
+        addActionListener(l);
+    }
+
+    public E getValue() { return value; }
 }
 
 /**
  * A button for numbers
  **/
-class DigitButton extends CalcButton {
-
-    public static final String actionCommand = "number";
-
-    /** the button's value */
-    private final int value;
-
-    /**
-     * @param value the button's value
-     **/
-    public DigitButton(int value) {
-        super(""+value);
-        this.value = value;
-        setActionCommand(DigitButton.actionCommand);
+class DigitButton extends CalcButton<Integer> {
+    public DigitButton(Integer v, ActionListener l) {
+        super(v, l, "number");
     }
-
-    /**
-     * Create a button and add it a listener
-     * @param value the button's value
-     * @param l a listener for this button
-     **/
-    public DigitButton(int value, ActionListener l) {
-        this(value);
-        addActionListener(l);
-    }
-
-    /**
-     * @return the button's value
-     **/
-    public int getValue() { return value; }
 }
 
 /**
- * A button for operations. A button's operation is represented as a char for
- * the moment.
+ * A button for operations.
  **/
-class OperationButton extends CalcButton {
-    public static final String actionCommand = "operation";
-
-    /** the button's operation */
-    private final char op;
-
-    /**
-     * @param op the button's operation
-     **/
-    public OperationButton(char op) {
-        super(""+op);
-        this.op = op;
-        setActionCommand(OperationButton.actionCommand);
+class OperationButton extends CalcButton<Character> {
+    public OperationButton(Character v, ActionListener l) {
+        super(v, l, "operation");
     }
-
-    /**
-     * Create a button and add it a listener
-     * @param op the button's operation
-     * @param l a listener for this button
-     **/
-    public OperationButton(char op, ActionListener l) {
-        this(op);
-        addActionListener(l);
-    }
-
-    /**
-     * @return the button's operation
-     **/
-    public char getOp() { return op; }
 }
 
 /**
@@ -118,7 +76,7 @@ class DigitsPanel extends JPanel {
         buttons = new DigitButton[10];
 
         for (int i=0; i<buttons.length; i++) {
-            buttons[i] = new DigitButton(i, listener);
+            buttons[i] = new DigitButton(new Integer(i), listener);
 
             if (i > 0) {
                 main.add(buttons[i]);

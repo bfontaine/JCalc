@@ -55,5 +55,11 @@ public class JCalcOperations {
                 return a*b;
             }
         });
+
+        ops.put('/', new JCalcBinaryOp() {
+            double compute(double a, double b) {
+                return a/b;
+            }
+        });
     }
 }

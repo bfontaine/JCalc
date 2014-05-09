@@ -2,12 +2,15 @@ package jcalc;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.logging.Logger;
 
 /**
  * A controller for a calculator
  **/
 class JCalcController implements ActionListener {
     private JCalcModel m;
+
+    private static Logger logger = Logger.getLogger("jcalc.JCalcController");
 
     /**
      * Create a new controller associated with a model
@@ -18,16 +21,21 @@ class JCalcController implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand() == "number") {
+        String action = e.getActionCommand();
+
+        if (action == "number") {
             DigitButton b = (DigitButton)e.getSource();
             this.m.pushValue(b.getValue());
             return;
         }
 
-        if (e.getActionCommand() == "operation") {
+        if (action == "operation") {
             OperationButton b = (OperationButton)e.getSource();
-            this.m.executeOperation(b.getOp());
+            this.m.executeOperation(b.getValue());
             return;
         }
+
+        logger.warning("Unknown actionCommand: " + action);
+
     }
 }
