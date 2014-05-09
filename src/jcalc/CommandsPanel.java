@@ -21,7 +21,7 @@ class CalcButton extends JButton {
 /**
  * A button for numbers
  **/
-class NumberButton extends CalcButton {
+class DigitButton extends CalcButton {
 
     public static final String actionCommand = "number";
 
@@ -31,10 +31,10 @@ class NumberButton extends CalcButton {
     /**
      * @param value the button's value
      **/
-    public NumberButton(int value) {
+    public DigitButton(int value) {
         super(""+value);
         this.value = value;
-        setActionCommand(NumberButton.actionCommand);
+        setActionCommand(DigitButton.actionCommand);
     }
 
     /**
@@ -42,7 +42,7 @@ class NumberButton extends CalcButton {
      * @param value the button's value
      * @param l a listener for this button
      **/
-    public NumberButton(int value, ActionListener l) {
+    public DigitButton(int value, ActionListener l) {
         this(value);
         addActionListener(l);
     }
@@ -96,7 +96,7 @@ class DigitsPanel extends JPanel {
     /**
      * the panel's buttons
      **/
-    private NumberButton[] buttons;
+    private DigitButton[] buttons;
 
     /**
      * Create a panel with a common listener for all buttons
@@ -115,10 +115,10 @@ class DigitsPanel extends JPanel {
         add(main, BorderLayout.CENTER);
         add(more, BorderLayout.SOUTH);
 
-        buttons = new NumberButton[10];
+        buttons = new DigitButton[10];
 
         for (int i=0; i<buttons.length; i++) {
-            buttons[i] = new NumberButton(i, listener);
+            buttons[i] = new DigitButton(i, listener);
 
             if (i > 0) {
                 main.add(buttons[i]);
