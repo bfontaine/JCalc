@@ -1,6 +1,6 @@
 package jcalc;
 
-import java.awt.FlowLayout;
+import java.awt.*;
 import javax.swing.*;
 
 /**
@@ -16,6 +16,7 @@ public class JCalc implements Runnable {
 
     public void run() {
         JFrame jf = new JFrame(name);
+        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         final ResultView result = new ResultView();
         final JCalcModel model = new JCalcModel();
@@ -25,11 +26,12 @@ public class JCalc implements Runnable {
         model.addObserver(result);
         model.reset();
 
-        jf.getContentPane().setLayout(new FlowLayout());
-        jf.getContentPane().add(result);
-        jf.getContentPane().add(cmds);
+        Container pane = jf.getContentPane();
 
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
+
+        pane.add(result);
+        pane.add(cmds);
 
         jf.pack();
         result.setVisible(true);
