@@ -23,6 +23,7 @@ public class JCalc implements Runnable {
         final CommandsPanel cmds = new CommandsPanel(controller);
 
         model.addObserver(result);
+        model.reset();
 
         jf.getContentPane().setLayout(new FlowLayout());
         jf.getContentPane().add(result);
