@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.logging.Logger;
 
 /**
- * A model for a calculator. This is suffix calculator for now.
+ * A model for a stack-based calculator
  **/
 public class JCalcModel extends Observable {
 
@@ -12,6 +12,8 @@ public class JCalcModel extends Observable {
      * Internal numbers stack.
      **/
     private Deque<Double> numbers;
+
+    private double value;
 
     /**
      * Available operations
@@ -34,33 +36,43 @@ public class JCalcModel extends Observable {
      **/
     private void notifyChange() {
         setChanged();
-        notifyObservers(getValue());
+        notifyObservers(value);
     }
 
     /**
-     * Return the current top value
-     * @return current top value
+     * Return the current value
+     * @return current value
      **/
-    public double getValue() {
-        Double v = numbers.peek();
+    public double getValue() { return value; }
 
-        return v != null ? v : 0;
+    /**
+     * Push the current value on the stack
+     **/
+    public void push() {
+        numbers.push(value);
+        value = 0;
+        notifyChange();
     }
 
     /**
-     * Push a new value on the numbers stack
-     * @param n the new value
-     * @see popValue
+     * Set the current value
      **/
-    public void pushValue(double n) {
-        numbers.push(new Double(n));
+    public void setValue(double value) {
+        this.value = value;
+        notifyChange();
+    }
+
+    /**
+     * Add a digit to the current value
+     **/
+    public void appendDigit(int d) {
+        value = value * 10 + d;
         notifyChange();
     }
 
     /**
      * Pop a value from the numbers stack
      * @return the top value
-     * @see pushValue
      **/
     public double popValue() {
         if (numbers.isEmpty()) {
@@ -73,6 +85,7 @@ public class JCalcModel extends Observable {
      * Reset the model and empty its numbers stack
      **/
     public void reset() {
+        value = 0;
         numbers.clear();
         notifyChange();
     }

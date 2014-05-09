@@ -25,13 +25,23 @@ class JCalcController implements ActionListener {
 
         if (action == "number") {
             DigitButton b = (DigitButton)e.getSource();
-            this.m.pushValue(b.getValue());
+            this.m.appendDigit(b.getValue());
             return;
         }
 
         if (action == "operation") {
             OperationButton b = (OperationButton)e.getSource();
             this.m.executeOperation(b.getValue());
+            return;
+        }
+
+        if (action == "push") {
+            this.m.push();
+            return;
+        }
+
+        if (action == "reset") {
+            this.m.reset();
             return;
         }
 

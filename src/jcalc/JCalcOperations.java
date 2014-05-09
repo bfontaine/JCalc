@@ -7,10 +7,10 @@ abstract class JCalcOp {
 }
 abstract class JCalcBinaryOp extends JCalcOp {
     public void execute(JCalcModel m) {
-        double b = m.popValue(),
-               a = m.popValue();
+        double a = m.popValue(),
+               b = m.getValue();
 
-        m.pushValue(compute(a, b));
+        m.setValue(compute(a, b));
     }
 
     abstract double compute(double a, double b);

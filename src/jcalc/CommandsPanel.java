@@ -99,22 +99,30 @@ class OperationsPanel extends JPanel {
     public OperationsPanel(ActionListener listener) {
         super();
 
-        JPanel main = new JPanel(),
-               more = new JPanel();
+        JPanel control = new JPanel(),
+               main    = new JPanel();
 
         // we might want to use a GridBagLayout instead in the future
         main.setLayout(new GridLayout(0, 2));
 
         setLayout(new BorderLayout());
+        add(control, BorderLayout.NORTH);
         add(main, BorderLayout.CENTER);
-        add(more, BorderLayout.SOUTH);
 
-        for (Character c : new Character[] { '+', '-', '*' }) {
+        JButton push  = new JButton("<<"),
+                reset = new JButton("R");
+
+        push.setActionCommand("push");
+        push.addActionListener(listener);
+
+        reset.setActionCommand("reset");
+        reset.addActionListener(listener);
+
+        control.add(push);
+        control.add(reset);
+
+        for (Character c : new Character[] { '+', '-', '*', '/' }) {
             main.add(new OperationButton(c, listener));
-        }
-
-        for (Character c : new Character[] { '=' }) {
-            more.add(new OperationButton(c, listener));
         }
     }
 }
