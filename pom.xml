@@ -3,8 +3,8 @@
     <groupId>jcalc</groupId>
     <artifactId>JCalc</artifactId>
     <version>1.0</version>
-
     <build>
+        <finalName>JCalc</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -20,4 +20,12 @@
             </plugin>
         </plugins>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.7</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
