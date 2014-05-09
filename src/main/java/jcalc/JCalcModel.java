@@ -18,7 +18,7 @@ public class JCalcModel extends Observable {
     /**
      * Available operations
      **/
-    private Hashtable<Character, JCalcOp> ops = JCalcOperations.defaultOps();
+    private Hashtable<Character, JCalcBinaryOp> ops = JCalcOperations.defaultOps();
 
     private static Logger logger = Logger.getLogger("jcalc.JCalcModel");
 
