@@ -5,12 +5,14 @@ import java.util.*;
 /**
  * A model for a calculator. This is a suffix calculator for now.
  **/
-class JCalcModel extends Observable {
+public class JCalcModel extends Observable {
 
     /**
      * Internal numbers stack. These are integers for now.
      **/
     private Deque<Integer> numbers;
+
+    private Hashtable<Character, JCalcOp> ops = JCalcOperations.defaultOps();
 
     /**
      * Create a new model with an empty numbers stack
@@ -75,15 +77,12 @@ class JCalcModel extends Observable {
      * @param op the operation
      **/
     public void executeOperation(char op) {
-        switch(op) {
-        case '+':
-            pushValue(popValue()+popValue());
-            break;
-        case '-':
-            int p = popValue();
-            pushValue(popValue()-p);
+        if (!ops.containsKey(op)) {
+            // TODO log unknown operation
+            return;
         }
 
+        ops.get(op).execute(this);
         notifyChange();
     }
 }

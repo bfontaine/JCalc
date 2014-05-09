@@ -151,15 +151,13 @@ class OperationsPanel extends JPanel {
         add(main, BorderLayout.CENTER);
         add(more, BorderLayout.SOUTH);
 
-        OperationButton plus  = new OperationButton('+', listener);
-        OperationButton minus = new OperationButton('-', listener);
+        for (Character c : new Character[] { '+', '-', '*' }) {
+            main.add(new OperationButton(c, listener));
+        }
 
-        OperationButton equals = new OperationButton('=', listener);
-
-        main.add(plus);
-        main.add(minus);
-
-        more.add(equals);
+        for (Character c : new Character[] { '=' }) {
+            more.add(new OperationButton(c, listener));
+        }
     }
 }
 
