@@ -31,17 +31,17 @@ We want to compute `(3+5)*(4-2)`. In the following table, the first column shows
 the pressed button, the second one shows the resulting value and the last one
 the internal stack (top on the right).
 
-| Command | Result | Stack   |
-|---------|-------:|:--------|
-| `3`     |      3 | `[]`    |
-| `<<`    |      0 | `[3]`   |
-| `5`     |      5 | `[3]`   |
-| `+`     |      8 | `[]`    |
-| `<<`    |      0 | `[8]`   |
-| `4`     |      4 | `[8]`   |
-| `<<`    |      0 | `[8,4]` |
-| `2`     |      2 | `[8,4]` |
-| `-`     |      2 | `[8]`   |
-| `*`     |     16 | `[]`    |
+| Command | Result | Stack |
+|---------|-------:|:------|
+| `3`     |      3 | -     |
+| `<<`    |      - | 3     |
+| `5`     |      5 | 3     |
+| `+`     |      8 | -     |
+| `<<`    |      - | 8     |
+| `4`     |      4 | 8     |
+| `<<`    |      - | 8, 4  |
+| `2`     |      2 | 8, 4  |
+| `-`     |      2 | 8     |
+| `*`     | **16** | -     |
 
 
