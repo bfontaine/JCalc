@@ -3,7 +3,7 @@ package jcalc;
 import java.util.*;
 
 /**
- * A model for a calculator. This is a suffix calculator for now.
+ * A model for a calculator. This is a digits suffix calculator for now.
  **/
 public class JCalcModel extends Observable {
 
