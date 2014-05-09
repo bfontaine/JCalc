@@ -1,5 +1,7 @@
 # JCalc
 
+[![Build Status](https://travis-ci.org/bfontaine/JCalc.svg)](https://travis-ci.org/bfontaine/JCalc)
+
 `JCalc` is a toy stack-based calculator written in Java. It was made to learn
 the Swing API, not as a real project.
 
