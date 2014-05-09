@@ -6,6 +6,11 @@ import java.util.Hashtable;
  * A binary operation
  **/
 abstract class JCalcBinaryOp {
+
+    /**
+     * Execute the operation on a model
+     * @param m the model
+     **/
     public void execute(JCalcModel m) {
         double a = m.popValue(),
                b = m.getValue();
@@ -13,6 +18,12 @@ abstract class JCalcBinaryOp {
         m.setValue(compute(a, b));
     }
 
+    /**
+     * Shortcut for simple operations
+     * @param a first value
+     * @param b second value
+     * @return the result of the operation applied on these values
+     **/
     abstract double compute(double a, double b);
 }
 
