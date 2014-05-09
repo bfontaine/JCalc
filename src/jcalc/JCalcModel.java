@@ -1,6 +1,7 @@
 package jcalc;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * A model for a calculator. This is a digits suffix calculator for now.
@@ -12,7 +13,12 @@ public class JCalcModel extends Observable {
      **/
     private Deque<Integer> numbers;
 
+    /**
+     * Available operations
+     **/
     private Hashtable<Character, JCalcOp> ops = JCalcOperations.defaultOps();
+
+    private static Logger logger = Logger.getLogger("jcalc.JCalcModel");
 
     /**
      * Create a new model with an empty numbers stack
@@ -78,7 +84,7 @@ public class JCalcModel extends Observable {
      **/
     public void executeOperation(char op) {
         if (!ops.containsKey(op)) {
-            // TODO log unknown operation
+            logger.warning("Unknown operation: "+op);
             return;
         }
 
