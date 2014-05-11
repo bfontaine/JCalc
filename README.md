@@ -20,7 +20,7 @@ Or double-click on the jar to open the app.
 `JCalc` uses a stack, which means you can make complicated operations which
 deal with priorities without using parentheses. To add the current value to the
 stack, press the “push” button (`<<`). You can now type a new value, and either
-push it on the stack or use one of the four simple operations.
+push it on the stack or use one of the six simple operations.
 
 An operation pop the top of the stack, applies itself on it and the current
 value (in that order), and replace the current value with the result.
